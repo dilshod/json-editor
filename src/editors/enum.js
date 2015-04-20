@@ -30,7 +30,7 @@ JSONEditor.defaults.editors.enum = JSONEditor.AbstractEditor.extend({
     this.switcher.style.marginBottom = 0;
 
     // Display area
-    this.display_area = this.theme.getIndentedPanel();
+    this.display_area = this.theme.getIndentedPanel(this);
     this.display_area.style.paddingTop = 0;
     this.display_area.style.paddingBottom = 0;
     this.container.appendChild(this.display_area);

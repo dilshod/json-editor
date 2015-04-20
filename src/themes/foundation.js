@@ -41,7 +41,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
     el.style.fontStyle = 'italic';
     return el;
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = document.createElement('div');
     el.className = 'panel';
     return el;

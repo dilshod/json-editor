@@ -44,7 +44,7 @@ JSONEditor.defaults.editors.table = JSONEditor.defaults.editors.array.extend({
     this.width = tmp.getNumColumns() + 2;
     
     if(!this.options.compact) {
-      this.title = this.theme.getHeader(this.getTitle());
+      this.title = this.theme.getHeader(this.getTitle(), this);
       this.container.appendChild(this.title);
       this.title_controls = this.theme.getHeaderButtonHolder();
       this.title.appendChild(this.title_controls);
@@ -52,7 +52,7 @@ JSONEditor.defaults.editors.table = JSONEditor.defaults.editors.array.extend({
         this.description = this.theme.getDescription(this.schema.description);
         this.container.appendChild(this.description);
       }
-      this.panel = this.theme.getIndentedPanel();
+      this.panel = this.theme.getIndentedPanel(this);
       this.container.appendChild(this.panel);
       this.error_holder = document.createElement('div');
       this.panel.appendChild(this.error_holder);

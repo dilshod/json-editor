@@ -37,7 +37,7 @@ JSONEditor.defaults.editors.base64 = JSONEditor.AbstractEditor.extend({
     this.preview = this.theme.getFormInputDescription(this.schema.description);
     this.container.appendChild(this.preview);
 
-    this.control = this.theme.getFormControl(this.label, this.uploader||this.input, this.preview);
+    this.control = this.theme.getFormControl(this.label, this.uploader||this.input, this.preview, this);
     this.container.appendChild(this.control);
   },
   refreshPreview: function() {

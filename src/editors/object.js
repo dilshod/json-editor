@@ -287,7 +287,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
     else {
       this.header = document.createElement('span');
       this.header.textContent = this.getTitle();
-      this.title = this.theme.getHeader(this.header);
+      this.title = this.theme.getHeader(this.header, this);
       this.container.appendChild(this.title);
       this.container.style.position = 'relative';
       
@@ -363,7 +363,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       this.container.appendChild(this.error_holder);
       
       // Container for child editor area
-      this.editor_holder = this.theme.getIndentedPanel();
+      this.editor_holder = this.theme.getIndentedPanel(this);
       this.editor_holder.style.paddingBottom = '0';
       this.container.appendChild(this.editor_holder);
 
@@ -536,7 +536,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
     labelText = this.schema.properties[key].title ? this.schema.properties[key].title : key;
     label = self.theme.getCheckboxLabel(labelText);
 
-    control = self.theme.getFormControl(label,checkbox);
+    control = self.theme.getFormControl(label, checkbox, null, this);
     control.style.paddingBottom = control.style.marginBottom = control.style.paddingTop = control.style.marginTop = 0;
     control.style.height = 'auto';
     //control.style.overflowY = 'hidden';

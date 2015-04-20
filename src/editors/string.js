@@ -169,6 +169,8 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
     else {
       this.input_type = 'text';
       this.input = this.theme.getFormInputField(this.input_type);
+      if (this.schema.placeholder)
+          this.input.placeholder = this.schema.placeholder;
     }
     
     // minLength, maxLength, and pattern
@@ -251,7 +253,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
 
     if(this.format) this.input.setAttribute('data-schemaformat',this.format);
 
-    this.control = this.theme.getFormControl(this.label, this.input, this.description);
+    this.control = this.theme.getFormControl(this.label, this.input, this.description, this);
     this.container.appendChild(this.control);
 
     // Any special formatting that needs to happen after the input is added to the dom

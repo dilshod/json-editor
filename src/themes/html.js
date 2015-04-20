@@ -14,7 +14,7 @@ JSONEditor.defaults.themes.html = JSONEditor.AbstractTheme.extend({
     el.style.fontStyle = 'italic';
     return el;
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = this._super();
     el.style.border = '1px solid #ddd';
     el.style.padding = '5px';

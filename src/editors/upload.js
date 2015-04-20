@@ -41,7 +41,7 @@ JSONEditor.defaults.editors.upload = JSONEditor.AbstractEditor.extend({
     this.preview = this.theme.getFormInputDescription(description);
     this.container.appendChild(this.preview);
 
-    this.control = this.theme.getFormControl(this.label, this.uploader||this.input, this.preview);
+    this.control = this.theme.getFormControl(this.label, this.uploader||this.input, this.preview, this);
     this.container.appendChild(this.control);
   },
   refreshPreview: function() {
