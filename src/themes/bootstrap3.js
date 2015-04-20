@@ -33,7 +33,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     }
     return el;
   },
-  getFormControl: function(label, input, description) {
+  getFormControl: function(label, input, description, editor) {
     var group = document.createElement('div');
 
     if(label && input.type === 'checkbox') {
@@ -44,21 +44,39 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
       group.appendChild(label);
       input.style.position = 'relative';
       input.style.cssFloat = 'left';
+      if (description)
+        group.appendChild(description);
     } 
     else {
       group.className += ' form-group';
-      if(label) {
-        label.className += ' control-label';
-        group.appendChild(label);
+      var format = (editor && (editor.format || editor.jsoneditor.options.format)) || "normal";
+      if (format == 'horizontal') {
+        // horizontal
+        if (label) {
+          label.className += ' col-md-3 control-label';
+          group.appendChild(label);
+        }
+        var e = document.createElement('div');
+        e.className = 'col-md-9 field';
+        this.addInput(e, input, editor);
+        if (description)
+          e.appendChild(description);
+        group.appendChild(e);
+      } else {
+        // vertical
+        if (label) {
+          label.className += ' control-label';
+          group.appendChild(label);
+        }
+        this.addInput(group, input, editor);
+        if (description)
+          group.appendChild(description);
       }
-      group.appendChild(input);
     }
-
-    if(description) group.appendChild(description);
 
     return group;
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = document.createElement('div');
     el.className = 'well well-sm';
     return el;
@@ -93,14 +111,16 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   },
 
   addInputError: function(input,text) {
-    if(!input.controlgroup) return;
+    if (!input.controlgroup) return;
     input.controlgroup.className += ' has-error';
-    if(!input.errmsg) {
+    if (!input.errmsg) {
       input.errmsg = document.createElement('p');
       input.errmsg.className = 'help-block errormsg';
-      input.controlgroup.appendChild(input.errmsg);
-    }
-    else {
+      if (this.jsoneditor.options.format == 'horizontal')
+        this.closest(input,'.field').appendChild(input.errmsg);
+      else
+        input.controlgroup.appendChild(input.errmsg);
+    } else {
       input.errmsg.style.display = '';
     }
 
@@ -164,5 +184,31 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     bar.removeAttribute('aria-valuenow');
     bar.style.width = '100%';
     bar.innerHTML = '';
+  },
+
+  /*
+   * Private methods
+   */
+  addInput: function(e, input, editor) {
+    if (editor && (editor.schema.preaddon || editor.schema.postaddon)) {
+      var d = document.createElement('div');
+      d.className = 'input-group';
+      var addon;
+      if (editor.schema.preaddon) {
+        addon = document.createElement('div');
+        addon.className = 'input-group-addon';
+        addon.innerHTML = editor.schema.preaddon;
+        d.appendChild(addon);
+      }
+      d.appendChild(input);
+      if (editor.schema.postaddon) {
+        addon = document.createElement('div');
+        addon.className = 'input-group-addon';
+        addon.innerHTML = editor.schema.postaddon;
+        d.appendChild(addon);
+      }
+      e.appendChild(d);
+    } else
+      e.appendChild(input);
   }
 });

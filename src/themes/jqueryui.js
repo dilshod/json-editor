@@ -119,7 +119,7 @@ JSONEditor.defaults.themes.jqueryui = JSONEditor.AbstractTheme.extend({
 
     button.setAttribute('title',title);
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = document.createElement('div');
     el.className = 'ui-widget-content ui-corner-all';
     el.style.padding = '1em 1.4em';

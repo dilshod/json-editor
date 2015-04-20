@@ -63,7 +63,7 @@ JSONEditor.AbstractTheme = Class.extend({
     el.style.fontWeight = 'normal';
     return el;
   },
-  getHeader: function(text) {
+  getHeader: function(text, editor) {
     var el = document.createElement('h3');
     if(typeof text === "string") {
       el.textContent = text;
@@ -166,7 +166,7 @@ JSONEditor.AbstractTheme = Class.extend({
     if(description) el.appendChild(description);
     return el;
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = document.createElement('div');
     el.style = el.style || {};
     el.style.paddingLeft = '10px';
@@ -295,8 +295,8 @@ JSONEditor.AbstractTheme = Class.extend({
   getTabContentHolder: function(tab_holder) {
     return tab_holder.children[1];
   },
-  getTabContent: function() {
-    return this.getIndentedPanel();
+  getTabContent: function(editor) {
+    return this.getIndentedPanel(editor);
   },
   markTabActive: function(tab) {
     this.applyStyles(tab,{

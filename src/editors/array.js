@@ -76,7 +76,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
     if(!this.options.compact) {
       this.header = document.createElement('span');
       this.header.textContent = this.getTitle();
-      this.title = this.theme.getHeader(this.header);
+      this.title = this.theme.getHeader(this.header, this);
       this.container.appendChild(this.title);
       this.title_controls = this.theme.getHeaderButtonHolder();
       this.title.appendChild(this.title_controls);
@@ -97,7 +97,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
         this.active_tab = null;
       }
       else {
-        this.panel = this.theme.getIndentedPanel();
+        this.panel = this.theme.getIndentedPanel(this);
         this.container.appendChild(this.panel);
         this.row_holder = document.createElement('div');
         this.panel.appendChild(this.row_holder);
@@ -106,7 +106,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
       }
     }
     else {
-        this.panel = this.theme.getIndentedPanel();
+        this.panel = this.theme.getIndentedPanel(this);
         this.container.appendChild(this.panel);
         this.controls = this.theme.getButtonHolder();
         this.panel.appendChild(this.controls);
@@ -191,7 +191,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
       holder = this.theme.getChildEditorHolder();
     }
     else {
-      holder = this.theme.getIndentedPanel();
+      holder = this.theme.getIndentedPanel(this);
     }
 
     this.row_holder.appendChild(holder);

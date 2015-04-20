@@ -45,7 +45,7 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
 
     // TODO: use bootstrap slider
   },
-  getIndentedPanel: function() {
+  getIndentedPanel: function(editor) {
     var el = document.createElement('div');
     el.className = 'well well-small';
     return el;
